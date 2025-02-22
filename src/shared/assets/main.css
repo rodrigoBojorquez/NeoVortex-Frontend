@@ -1,0 +1,23 @@
+@import "../../../node_modules/tailwindcss";
+
+@layer components {
+    /*
+        Formularios
+    */
+    .input-container {
+        @apply flex flex-col relative pb-8;
+    }
+
+    .input-container label {
+        @apply block;
+    }
+
+    .input-container input {
+        @apply border;
+    }
+
+    .input-container span {
+        @apply text-red-500 mt-1 absolute bottom-0;
+    }
+
+}
