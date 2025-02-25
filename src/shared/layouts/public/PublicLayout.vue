@@ -10,10 +10,10 @@ const { loading } = storeToRefs(authStore)
 </script>
 
 <template>
-  <main class="container max-w-7xl mx-auto p-4 h-dvh">
+  <main class=" h-dvh">
     <PublicNavbar/>
 
-    <div class="grow relative">
+    <div class="grow p-5 container max-w-7xl mx-auto">
       <RouterView v-if="!loading"/>
       <AppLoader v-else/>
     </div>
