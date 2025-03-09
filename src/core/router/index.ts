@@ -1,47 +1,24 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import AppLayout from "@/shared/layouts/app/AppLayout.vue";
-import LandingView from "@/views/public/LandingView.vue";
-import PublicLayout from "@/shared/layouts/public/PublicLayout.vue";
-import LoginView from "@/views/public/LoginView.vue";
 import {useAuthStore} from "@/core/stores/authStore.ts";
-import {watch, watchEffect} from "vue";
+import {watch} from "vue";
 import {storeToRefs} from "pinia";
+import authRoutes from "@/core/router/authRoutes.ts";
+import publicRoutes from "@/core/router/publicRoutes.ts";
+import appRoutes from "@/core/router/appRoutes.ts";
+import adminRoutes from "@/core/router/adminRoutes.ts";
+import {isSuperAdmin} from "@/core/common/composables/authUtilities.ts";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    ...authRoutes,
+    ...publicRoutes,
+    ...appRoutes,
+    ...adminRoutes,
     {
-      path: "/login",
-      name: "login",
-      component: LoginView
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: () => import("@/views/public/RegisterView.vue")
-    },
-    {
-      path: "/",
-      component: PublicLayout,
-      children: [
-        {
-          path: "/",
-          name: "landing",
-          component: LandingView
-        },
-      ]
-    },
-    {
-      path: '/app',
-      component: AppLayout,
-      meta: {requiresAuth: true},
-      children: [
-        {
-          path: "",
-          name: "app-home",
-          component: () => import("@/views/app/home/HomeView.vue")
-        }
-      ]
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: () => import("@/shared/errors/Error404View.vue"),
     },
   ],
 })
@@ -65,4 +42,13 @@ router.beforeEach(async (to, from) => {
   if (to.meta.requiresAuth && !isAuth.value) {
     return { name: "login" };
   }
+
+  if (to.meta.requiresAdminAccess) {
+    if (!isSuperAdmin())
+      return { name: "not-found" };
+  }
 });
+
+router.afterEach((to) => {
+  document.title = to.meta.title ? `Vortex - ${to.meta.title as string}` : "Vortex - Libreria"
+})

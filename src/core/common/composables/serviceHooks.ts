@@ -1,4 +1,4 @@
-import type {UseMutationOptions} from "@tanstack/vue-query";
+import {type UseMutationOptions} from "@tanstack/vue-query";
 import {useMutation} from "@tanstack/vue-query";
 import type {AxiosError} from "axios";
 import {TYPE, useToast} from "vue-toastification";

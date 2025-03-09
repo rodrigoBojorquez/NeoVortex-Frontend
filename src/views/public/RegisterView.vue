@@ -29,54 +29,54 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold mb-6">Registro</h1>
+  <v-main class="d-flex justify-center align-center">
+    <v-container class="d-flex justify-center align-center min-vh-100">
+      <v-card class="pa-6 rounded-lg w-75" elevation="3">
+        <v-card-title class="text-h4 font-weight-black">Crea tu cuenta</v-card-title>
+        <v-card-subtitle class="text-h6">Y dale un vistazo a nuestro catalogo de libros</v-card-subtitle>
 
-    <form @submit="onSubmit" class="space-y-4">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          v-model="name"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        <span class="text-red-500 text-sm">{{ errors.name }}</span>
-      </div>
+        <v-form @submit.prevent="onSubmit" class="mt-10">
+          <v-text-field
+            variant="outlined"
+            label="Nombre"
+            v-model="name"
+            :error-messages="errors.name"
+            prepend-inner-icon="mdi-account"
+            class="mb-4"
+            clearable
+            required
+          ></v-text-field>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
-        <input
-          id="email"
-          type="email"
-          v-model="email"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        <span class="text-red-500 text-sm">{{ errors.email }}</span>
-      </div>
+          <v-text-field
+            variant="outlined"
+            label="Correo"
+            v-model="email"
+            :error-messages="errors.email"
+            prepend-inner-icon="mdi-email"
+            class="mb-4"
+            clearable
+            required
+          ></v-text-field>
 
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-        <input
-          id="password"
-          type="password"
-          v-model="password"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        <span class="text-red-500 text-sm">{{ errors.password }}</span>
-      </div>
+          <v-text-field
+            variant="outlined"
+            label="Contraseña"
+            v-model="password"
+            type="password"
+            clearable
+            :error-messages="errors.password"
+            prepend-inner-icon="mdi-lock"
+            class="mb-4"
+            required
+          ></v-text-field>
 
-      <button
-        type="submit"
-        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-      >
-        Registrarse
-      </button>
-
-      <p>¿Ya tienes cuenta?</p>
-
-      <RouterLink :to="{ name: 'login' }" class="text-blue-500 hover:text-blue-600">Iniciar sesión
-      </RouterLink>
-    </form>
-  </div>
+          <v-btn type="submit" variant="flat" rounded="xl" color="blue font-weight-bold" block class="mt-3">Registrarse</v-btn>
+        </v-form>
+        <v-card-text class="text-center mt-2">
+          ¿Ya tienes cuenta?
+          <RouterLink :to="{ name: 'login' }" class="blue">Iniciar sesión</RouterLink>
+        </v-card-text>
+      </v-card>
+    </v-container>
+  </v-main>
 </template>

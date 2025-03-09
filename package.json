@@ -18,14 +18,17 @@
     "@tanstack/vue-query": "^5.66.3",
     "@vee-validate/yup": "^4.15.0",
     "axios": "^1.7.9",
+    "jwt-decode": "^4.0.0",
     "pinia": "^2.3.1",
     "tailwindcss": "^4.0.6",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
-    "vue-toastification": "^2.0.0-rc.5"
+    "vue-toastification": "^2.0.0-rc.5",
+    "vuetify": "^3.7.14"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.1",
     "@vitejs/plugin-vue": "^5.2.1",

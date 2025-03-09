@@ -1,17 +1,32 @@
 <script setup lang="ts">
-import {useRoute} from "vue-router";
+import {useLogout} from "@/core/services/authService.ts";
+import {useRoute, useRouter} from "vue-router";
 
+const { mutateAsync: logout } = useLogout();
+const router = useRouter();
 const route = useRoute();
 
+const handleLogout = async () => {
+  await logout(undefined, {
+    onSuccess: async () => {
+      await router.push({ name: "login" });
+    },
+  });
+};
+
 const links = [
-  { path: "/app/books", label: "📔 Libros" },
-  { path: "/contact", label: "📑 Contacto" },
+  { path: "/admin/users", label: "👥 Usuarios" },
+  { path: "/admin/roles", label: "🔐 Roles" },
+  { path: "/admin/books", label: "📚 Libros" },
+  { path: "/admin/categories", label: "📂 Categorías" },
 ];
 
 const isActive = (linkPath: string) => {
   if (linkPath === "/admin") return route.path === "/admin"; // Exact match for dashboard
   return route.path.startsWith(linkPath);
 };
+
+
 </script>
 
 <template>
@@ -32,9 +47,8 @@ const isActive = (linkPath: string) => {
         </v-btn>
       </v-row>
 
-      <v-btn :to="{name: 'login'}" variant="flat" color="blue-lighten-1">🚪 Iniciar sesión</v-btn>
-      <v-btn :to="{name: 'register'}" variant="tonal" color="grey-darken-2" class="ml-3">😃 Registrarse</v-btn>
 
+      <v-btn @click="handleLogout" color="red-darken-1">🚪 Cerrar Sesión</v-btn>
     </v-container>
   </v-app-bar>
 </template>

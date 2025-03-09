@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import PublicNavbar from "@/shared/layouts/public/PublicNavbar.vue";
+import AdminNavbar from "@/shared/layouts/admin/AdminNavbar.vue";
 </script>
 
 <template>
   <v-layout>
-    <PublicNavbar/>
+    <AdminNavbar />
     <v-main>
+      <v-container>
         <RouterView/>
+      </v-container>
     </v-main>
   </v-layout>
 </template>
-

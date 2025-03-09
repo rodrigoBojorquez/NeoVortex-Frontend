@@ -1,3 +1,5 @@
+import type {JwtPayload} from "jwt-decode";
+
 interface LoginRequest {
   email: string
   password: string
@@ -13,4 +15,8 @@ interface AuthResponse {
   token: string
 }
 
-export type { LoginRequest, RegisterRequest, AuthResponse }
+interface TokenPayload extends JwtPayload {
+  permissions: string
+}
+
+export type { LoginRequest, RegisterRequest, AuthResponse, TokenPayload }

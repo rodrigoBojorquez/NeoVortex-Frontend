@@ -8,6 +8,9 @@ const store = useAuthStore()
 </script>
 
 <template>
-  <RouterView v-if="!store.loading"/>
-  <AppLoader v-else/>
+  <v-app>
+
+    <RouterView v-if="!store.loading"/>
+    <AppLoader v-else/>
+  </v-app>
 </template>
